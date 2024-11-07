@@ -15,10 +15,8 @@ public class Block {
 
     //applySha256 helper
     private String calculateHash() {
-        String calculatedhash = StringUtil.applySha256(
+        return StringUtil.applySha256(
                 previousHash + Long.toString(timeStamp) + data
         );
-
-        return calculatedhash;
     }
 }

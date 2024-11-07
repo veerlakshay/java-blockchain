@@ -14,7 +14,7 @@ public class Block {
     }
 
     //applySha256 helper
-    private String calculateHash() {
+    public String calculateHash() {
         return StringUtil.applySha256(
                 previousHash + Long.toString(timeStamp) + data
         );

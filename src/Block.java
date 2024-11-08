@@ -23,6 +23,8 @@ public class Block {
 
     //We will require miners to do proof-of-work by trying different variable values in the block until its hash starts with a certain number of 0’s.
     //block mining method
+    //A tampered blockchain will not be able to catch up with a longer & valid chain. *
+    //unless they have vastly more computation speed than all other nodes in your network combined. A future quantum computer or something
     public void mineBlock(int difficulty) {
         //create a String with difficulty * "0"
         String target = new String(new char[difficulty]).replace('\0' , '0');

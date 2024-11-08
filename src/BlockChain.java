@@ -1,3 +1,9 @@
+//This blockchain:
+//> Is made up of blocks that store data.
+//> Has a digital signature that chains your blocks together.
+//> Requires proof of work mining to validate new blocks.
+//> Can be check to see if data in it is valid and unchanged.
+
 import java.util.ArrayList;
 import com.google.gson.GsonBuilder;
 
@@ -5,7 +11,7 @@ public class BlockChain {
 
     //blockchain list
     public static ArrayList<Block> blockchain = new ArrayList<>();
-    public static int difficulty = 5;
+    public static int difficulty = 1;
     public static void main(String[] args) {
         blockchain.add(new Block("Hi from first block" , "0"));
         System.out.println("Trying to mine block 1 ...");

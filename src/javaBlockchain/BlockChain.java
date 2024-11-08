@@ -1,4 +1,4 @@
-//This blockchain:
+package javaBlockchain;//This blockchain:
 //> Is made up of blocks that store data.
 //> Has a digital signature that chains your blocks together.
 //> Requires proof of work mining to validate new blocks.

@@ -1,3 +1,5 @@
+package javaBlockchain;
+
 import java.security.MessageDigest;
 public class StringUtil {
     //Apply  Sha256 to a string and returns the result

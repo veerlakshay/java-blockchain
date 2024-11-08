@@ -1,3 +1,7 @@
+package javaBlockchain;
+
+import javaBlockchain.StringUtil;
+
 import java.util.Date;
 public class Block {
     public String hash;

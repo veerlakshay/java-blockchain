@@ -1,4 +1,4 @@
-//For our ‘Blockcoin’ the public key will act as our address.
+package javaBlockchain;//For our ‘Blockcoin’ the public key will act as our address.
 // It’s OK to share this public key with others to receive payment.
 //Our private key is used to sign our transactions,
 // so that nobody can spend our Blockcoin other than the owner of the private key.
@@ -17,6 +17,8 @@ public class Wallet {
 
     private void generateKeyPair() {
         try{
+            // It uses a special type of cryptography (called Elliptic Curve Digital Signature Algorithm, or ECDSA)
+
             KeyPairGenerator keyGen = KeyPairGenerator.getInstance("ECDSA" , "BC");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
             ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");

@@ -3,15 +3,19 @@ package javaBlockchain;
 import javaBlockchain.StringUtil;
 
 import java.util.Date;
+import java.util.ArrayList;
+
 public class Block {
     public String hash;
     public String previousHash;
-    private String data;
+    public String merkleRoot;
+    //our data will be a simple message.
+    public ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private long timeStamp; // as number of milliseconds since 1/1/1970
     private int nonce;
 
-    public Block(String data, String previousHash) {
-        this.data = data;
+    //Block Contructor.
+    public Block( String previousHash) {
         this.previousHash = previousHash;
         this.timeStamp = new Date().getTime();
         //doing this after setting other values
@@ -21,7 +25,7 @@ public class Block {
     //applySha256 helper
     public String calculateHash() {
         return StringUtil.applySha256(
-                previousHash + Long.toString(timeStamp) + data
+                previousHash + Long.toString(timeStamp) + Integer.toString(nonce) + merkleRoot
         );
     }
 
@@ -30,12 +34,32 @@ public class Block {
     //A tampered blockchain will not be able to catch up with a longer & valid chain. *
     //unless they have vastly more computation speed than all other nodes in your network combined. A future quantum computer or something
     public void mineBlock(int difficulty) {
+
+        merkleRoot = StringUtil.getMerkleRoot(transactions);
         //create a String with difficulty * "0"
-        String target = new String(new char[difficulty]).replace('\0' , '0');
+        String target = StringUtil.getMerkleRoot(transactions);
         while(!hash.substring(0 , difficulty).equals(target)){
             nonce++;
             hash = calculateHash();
         }
         System.out.println("Block Mined!!! : " + hash);
+    }
+
+    //Add transactions to this block
+    //Our addTransaction boolean method will add the transactions and
+    // will only return true if the transaction has been successfully added.
+    public boolean addTransaction(Transaction transaction) {
+        //process transaction and check if valid , unless block is genesis block then ignore
+        if(transaction == null) return false;
+        if((previousHash != "0")) {
+            if ((transaction.processTransaction() != true)) {
+                System.out.println("Transaction failed to process. Discarded");
+                return false;
+            }
+        }
+
+        transactions.add(transaction);
+        System.out.println("Transaction Successfully added to block");
+        return true;
     }
 }
